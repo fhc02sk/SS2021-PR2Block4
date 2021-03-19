@@ -24,7 +24,7 @@ public class ProductManager {
             for (Product p : products) {
                 oos.writeObject(p);
             }
-            oos.writeObject(null);
+  //          oos.writeObject(null);
             //oos.writeObject(products);
             oos.flush();
         } catch (FileNotFoundException e) {
@@ -52,7 +52,11 @@ public class ProductManager {
             while ((p = (Product) ois.readObject()) != null) {
                 products.add(p);
             }
-        } catch (IOException | ClassNotFoundException e) {
+        }
+        catch(EOFException ex) {
+            System.out.println("EOF reached");
+        }
+        catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         finally {
