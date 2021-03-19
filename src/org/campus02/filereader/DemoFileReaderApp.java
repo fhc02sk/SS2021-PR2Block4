@@ -9,8 +9,11 @@ public class DemoFileReaderApp {
         File file = new File("D:\\Temp\\addresses_new_2028.csv");
 
         try {
-            FileReader fileReader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            //FileReader fileReader = new FileReader(file);
+            // Alternative mit Stream-Klassen
+            FileInputStream fis = new FileInputStream(file);
+
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fis));
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
