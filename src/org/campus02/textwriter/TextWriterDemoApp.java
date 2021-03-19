@@ -6,21 +6,15 @@ public class TextWriterDemoApp {
 
     public static void main(String[] args)  {
 
-        InputStreamReader isr = new InputStreamReader(System.in);
-        BufferedReader bufferedReaderConsole = new BufferedReader(isr);
-
-        try {
+        try (BufferedReader bufferedReaderConsole = new BufferedReader(new InputStreamReader(System.in));
+             PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("D:\\temp\\consolelog.txt", true)))
+        ){
             String lineFromConsole;
-            PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter("D:\\temp\\consolelog.txt", true)));
 
             while (!(lineFromConsole = bufferedReaderConsole.readLine()).equals("STOP")){
                 pw.println(lineFromConsole);
             }
             pw.flush();
-            pw.close();
-            bufferedReaderConsole.close();
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
